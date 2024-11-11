@@ -1,0 +1,31 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+    <div class="container col-md-8 mt-5">
+        <h2 class="text-center mb-4">{{ user.username }}'s Profile</h2>
+
+        <!-- User Info Card -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Account Details</h5>
+                <p><strong>Email:</strong> {{ user.email }}</p>
+                <p><strong>Total Score:</strong> {{ total_score }}</p>
+            </div>
+        </div>
+
+        <!-- Solved Challenges Section -->
+        <h3 class="mt-4 mb-3">Solved Challenges</h3>
+        <div class="list-group">
+            {% for score in solved_challenges %}
+                <a href="{% url 'solve_challenge' score.challenge.id %}" class="list-group-item list-group-item-action">
+                    <h5 class="mb-1">{{ score.challenge.title }}</h5>
+                    <p class="mb-1">{{ score.challenge.category|title }} - Points: {{ score.points }}</p>
+                </a>
+            {% empty %}
+                <div class="list-group-item">
+                    <p class="mb-0">You have not solved any challenges yet.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

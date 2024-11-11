@@ -1,0 +1,50 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <!-- Category Header -->
+        <h2 class="text-center mb-4">
+            Challenges - {% if category %}{{ category|title }}{% else %}All Categories{% endif %}
+        </h2>
+
+        <!-- Category Navigation -->
+        <div class="mb-4">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link {% if not category %}active{% endif %}" href="{% url 'challenges' %}">All Categories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if category == 'pwn' %}active{% endif %}" href="{% url 'challenges_by_category' category='pwn' %}">Pwn</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if category == 'rev' %}active{% endif %}" href="{% url 'challenges_by_category' category='rev' %}">Reverse Engineering</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if category == 'crypto' %}active{% endif %}" href="{% url 'challenges_by_category' category='crypto' %}">Cryptography</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if category == 'web' %}active{% endif %}" href="{% url 'challenges_by_category' category='web' %}">Web Exploitation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if category == 'misc' %}active{% endif %}" href="{% url 'challenges_by_category' category='misc' %}">Miscellaneous</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Challenge List -->
+        <div>
+            <h3>Challenges</h3>
+            <ul class="list-group">
+                {% for challenge in challenges %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a href="{% url 'solve_challenge' challenge.id %}" class="btn btn-link">{{ challenge.title }}</a>
+                        <span class="badge bg-primary rounded-pill">{{ challenge.category|title }}</span>
+                        <span class="badge bg-secondary">{{ challenge.difficulty }}</span>
+                    </li>
+                {% empty %}
+                    <li class="list-group-item">No challenges available in this category.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

@@ -4,7 +4,7 @@
 ## 📖 Overview
 
 A Capture The Flag (CTF) platform built using Django.  
-This platform allows users to create, manage, and participate in CTF challenges with features like tscoring, and challenge tracking.
+This platform allows users to create, manage, and participate in CTF challenges with features like real time scoring, and challenge tracking.
 
 ## 🌟 Features
 
